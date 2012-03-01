@@ -1,3 +1,3 @@
 default[:dotfiles] = {
- "standard_repository" : "git@git.scalaxy.ru:/dotfiles.git"
+ "standard_repository" => "git@git.scalaxy.ru:/dotfiles.git"
 }
