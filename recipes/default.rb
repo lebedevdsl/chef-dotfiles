@@ -14,7 +14,7 @@ admins.each do |login|
 	home = "/home/#{login}"
 	
 	# Exporting files only if user realy wants to
-	if admin['dotfiles']['enabled'] and admin['dotfiles']['enabled'] == true
+	if admin['dotfiles']['enabled'] == true 
 		# Exporting standard dotfiles only if home_directory exists	
 		git "#{home}/.dotfiles" do
 			repository node[:dotfiles]['standard_repository']
