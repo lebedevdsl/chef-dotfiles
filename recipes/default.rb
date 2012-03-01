@@ -23,8 +23,7 @@ admins.each do |login|
 		end
 		
 		Dir.foreach("#{home}/.dotfiles") do |entry|
-			if File.exists?("#{home}/#{entry}") and not File.symlink?("#{home}/#{entry}")
-				Fileutils.mv("#{home}/#{entry}","#{home}/.dotfiles/#{entry}.bckp")
+			backup(entry)
 			link "#{home}/#{entry}" do
 				to entry
 			end
@@ -40,8 +39,7 @@ admins.each do |login|
 		end
 		
 		admin["dotfiles"]["files"].each do |entry|
-			if File.exists?("#{home}/#{entry}") and not File.symlink?("#{home}/#{entry}")
-				Fileutils.mv("#{home}/#{entry}","#{home}/.dotfiles/#{entry}.#{Date.now}.bckp")
+			backup(entry)
 			link "#{home}/#{entry}" do
 				to "#{home}/.custom_dotfiles/#{entry}"
 			end
