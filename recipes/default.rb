@@ -5,6 +5,9 @@
 # Copyright 2012, Oversun-Scalaxy LTD
 #
 
+# Required for backuping original files
+require 'fileutils'
+
 admins = data_bag("admins")
 admins.each do |login|
 	admin = data_bag_item("admins", login)
@@ -20,6 +23,8 @@ admins.each do |login|
 		end
 		
 		Dir.foreach("#{home}/.dotfiles") do |entry|
+			if File.exists?("#{home}/#{entry}") and not File.symlink?("#{home}/#{entry}")
+				Fileutils.mv("#{home}/#{entry}","#{home}/.dotfiles/#{entry}.bckp")
 			link "#{home}/#{entry}" do
 				to entry
 			end
@@ -34,9 +39,11 @@ admins.each do |login|
 			only_if {File.directory?(home)}
 		end
 		
-		admin["dotfiles"].each do |custom_entry|
-			link "#{home}/#{custom_entry}" do
-				to "#{home}/.custom_dotfiles/#{custom_entry}"
+		admin["dotfiles"]["files"].each do |entry|
+			if File.exists?("#{home}/#{entry}") and not File.symlink?("#{home}/#{entry}")
+				Fileutils.mv("#{home}/#{entry}","#{home}/.dotfiles/#{entry}.#{Date.now}.bckp")
+			link "#{home}/#{entry}" do
+				to "#{home}/.custom_dotfiles/#{entry}"
 			end
 		end
 	end
