@@ -9,7 +9,7 @@
 
 admins = data_bag("admins")
 
-log "[dotfiles] #{admins}" do
+log "[dotfiles] 1. #{admins}" do
 	level :info
 end
 
@@ -18,13 +18,13 @@ admins.each do |login|
 	home = "/home/#{login}"
 
 
-	log "[dotfiles] #{admin} #{home}" do
+	log "[dotfiles] 2. #{admin} #{home}" do
 		level :info
 	end
 	
 	# Exporting files only if user realy wants to
 	
-	log "[dotfiles] #{admin['dotfiles']['enabled']}" do
+	log "[dotfiles] 3. #{admin['dotfiles']['enabled']}" do
 		level :info
 	end
 
@@ -32,7 +32,7 @@ admins.each do |login|
 		# Exporting standard dotfiles only if home_directory exists	
 		git "#{home}/.dotfiles" do
 			
-			log "[dotfiles] #{node[:dotfiles][:standard_repository]}" do
+			log "[dotfiles] 4. #{node[:dotfiles][:standard_repository]}" do
 				level :info
 			end
 
