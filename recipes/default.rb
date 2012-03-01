@@ -6,7 +6,6 @@
 #
 
 # Required for backuping original files
-require 'fileutils'
 
 admins = data_bag("admins")
 admins.each do |login|
@@ -27,6 +26,10 @@ admins.each do |login|
 			link "#{home}/#{entry}" do
 				to entry
 			end
+		end
+
+		log "[dotfiles] Default dotfiles successfuly exported from '#{node[:dotfiles][':standard_repository']}'" do
+			level :info
 		end
 
 		# Uploading all user's custom dotfiles if present
