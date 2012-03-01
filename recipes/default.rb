@@ -8,14 +8,34 @@
 # Required for backuping original files
 
 admins = data_bag("admins")
+
+log "[dotfiles] #{admins}" do
+	level :info
+end
+
 admins.each do |login|
 	admin = data_bag_item("admins", login)
 	home = "/home/#{login}"
+
+
+	log "[dotfiles] #{admin} #{home}" do
+		level :info
+	end
 	
 	# Exporting files only if user realy wants to
+	
+	log "[dotfiles] #{admin['dotfiles']['enabled']}" do
+		level :info
+	end
+
 	if admin['dotfiles']['enabled'] == true 
 		# Exporting standard dotfiles only if home_directory exists	
 		git "#{home}/.dotfiles" do
+			
+			log "[dotfiles] #{node[:dotfiles][:standard_repository]}" do
+				level :info
+			end
+
 			repository node[:dotfiles][:standard_repository]
 			action :export
 			only_if {File.directory?(home)}
