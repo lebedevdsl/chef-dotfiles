@@ -6,39 +6,46 @@
 #
 
 # Required for backuping original files
+require 'fileutils'
 
-admins = data_bag("admins")
-
-log "[dotfiles] 1. #{admins}" do
-	level :info
+# Installing required git core-packages
+package 'git-core' do
+	action :install
+	options '--force-yes'
 end
 
+# Retrieving admins collection
+admins = data_bag("admins")
+# logging debug_info
+log "[dotfiles] 1. #{admins}" do
+	level :debug
+end
+
+# admins list round-trip
 admins.each do |login|
 	admin = data_bag_item("admins", login)
 	home = "/home/#{login}"
-
-
+	
+	#logging debug info
 	log "[dotfiles] 2. #{admin} #{home}" do
-		level :info
+		level :debug
+	end
+	
+	#logging debug info
+	log "[dotfiles] 3. #{admin['dotfiles']['enabled']}" do
+		level :debug
 	end
 	
 	# Exporting files only if user realy wants to
-	
-	log "[dotfiles] 3. #{admin['dotfiles']['enabled']}" do
-		level :info
-	end
-
 	if admin['dotfiles']['enabled'] == true 
 		# Exporting standard dotfiles only if home_directory exists	
 		git "#{home}/.dotfiles" do
-			
-			log "[dotfiles] 4. #{node[:dotfiles][:standard_repository]}" do
-				level :info
-			end
-
 			repository node[:dotfiles][:standard_repository]
 			action :export
 			only_if {File.directory?(home)}
+			log "[dotfiles] Uploading standard dotfiles for #{admin} from #{node[:dotfiles][:standard_repository]} to .dotfiles" do
+				level :info
+			end
 		end
 		
 		Dir.foreach("#{home}/.dotfiles") do |entry|
@@ -47,7 +54,6 @@ admins.each do |login|
 				to entry
 			end
 		end
-
 		log "[dotfiles] Default dotfiles successfuly exported from '#{node[:dotfiles][':standard_repository']}'" do
 			level :info
 		end
