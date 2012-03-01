@@ -14,10 +14,10 @@ admins.each do |login|
 	home = "/home/#{login}"
 	
 	# Exporting files only if user realy wants to
-	if admin["dotfiles"]["enabled"] and admin["dotfiles"]["enabled"] == true
+	if admin['dotfiles']['enabled'] and admin['dotfiles']['enabled'] == true
 		# Exporting standard dotfiles only if home_directory exists	
 		git "#{home}/.dotfiles" do
-			repository node[:dotfiles]["standard_repository"]
+			repository node[:dotfiles]['standard_repository']
 			action :export
 			only_if {File.directory?(home)}
 		end
@@ -31,14 +31,14 @@ admins.each do |login|
 
 		# Uploading all user's custom dotfiles if present
 		git "#{home}/.custom_dotfiles" do
-			repository admin["dotfiles"]["custom_dotfiles_repo"]
+			repository admin['dotfiles']['custom_dotfiles_repo']
 			user login
 			action :sync
-			not_if { admin["dotfiles"]["custom_dotfiles_repo"].nil? }
+			not_if { admin['dotfiles']['custom_dotfiles_repo'].nil? }
 			only_if {File.directory?(home)}
 		end
 		
-		admin["dotfiles"]["files"].each do |entry|
+		admin['dotfiles']['files'].each do |entry|
 			backup(entry)
 			link "#{home}/#{entry}" do
 				to "#{home}/.custom_dotfiles/#{entry}"
