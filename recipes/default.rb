@@ -16,7 +16,7 @@ admins.each do |login|
 	if admin['dotfiles']['enabled'] == true 
 		# Exporting standard dotfiles only if home_directory exists	
 		git "#{home}/.dotfiles" do
-			repository node[:dotfiles]['standard_repository']
+			repository node[:dotfiles][:standard_repository]
 			action :export
 			only_if {File.directory?(home)}
 		end
