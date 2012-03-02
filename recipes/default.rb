@@ -37,7 +37,7 @@ admins.each do |login|
 	end
 	
 	# Exporting files only if user realy wants to
-	#unless admin['dotfiles']['enabled'] != true
+	unless admin['dotfiles']['enabled'] != true
 		directory "#{home}/.dotfiles" do
 			action :create
 			owner login
@@ -78,5 +78,5 @@ admins.each do |login|
 				to "#{home}/.custom_dotfiles/#{entry}"
 			end
 		end
-	#end
+	end
 end
