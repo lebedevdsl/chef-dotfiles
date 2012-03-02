@@ -37,7 +37,7 @@ admins.each do |login|
 	end
 	
 	# Exporting files only if user realy wants to
-	unless admin['dotfiles']['enabled'] != true
+	#unless admin['dotfiles']['enabled'] != true
 		directory "#{home}/.dotfiles" do
 			action :create
 			user login
@@ -51,7 +51,7 @@ admins.each do |login|
 		git "#{home}/.dotfiles" do
 			repository node[:dotfiles][:standard_repository]
 			action :export
-			only_if {File.directory?(home)}
+			#only_if {File.directory?(home)}
 		end
 		
 		Dir.foreach("#{home}/.dotfiles") do |entry|
@@ -72,11 +72,11 @@ admins.each do |login|
 			only_if {File.directory?(home)}
 		end
 		
-		admin['dotfiles']['files'].each do |entry|
+		admin['dotfiles']['custom_dotfiles'].each do |entry|
 			backup(entry)
 			link "#{home}/#{entry}" do
 				to "#{home}/.custom_dotfiles/#{entry}"
 			end
 		end
-	end
+	#end
 end
