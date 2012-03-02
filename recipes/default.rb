@@ -25,7 +25,6 @@ end
 admins.each do |login|
 	admin = data_bag_item("admins", login)
 	home = "/home/#{login}"
-	
 	#logging debug info
 	log "[dotfiles] 2. #{admin} #{home}" do
 		level :debug
@@ -37,7 +36,7 @@ admins.each do |login|
 	end
 	
 	# Exporting files only if user realy wants to
-	if admin['dotfiles']['enabled'] == true 
+	if admin['dotfiles']['enabled'] == true do
 		directory "#{home}/.dotfiles" do
 			action :create
 			user login
