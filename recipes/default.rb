@@ -40,7 +40,7 @@ admins.each do |login|
 	#unless admin['dotfiles']['enabled'] != true
 		directory "#{home}/.dotfiles" do
 			action :create
-			user login
+			owner login
 			mode '0700'
 		end
 		
