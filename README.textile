@@ -21,7 +21,7 @@ h2. How to?
 		<pre>$ knife data bag create admins admin_name</pre>
 		<pre>$ knife data bag edit admins admin_name</pre>
 		
-bc.
+		<pre>
 		{
 			"id": "admin_name"
 			"dotfiles": {
@@ -36,20 +36,20 @@ bc.
 				"custom_dotfiles_repo": "YOUR_PUBLIC_REPOSITORY_HERE"
 			}
 		}
-		
+		</pre>
 
 h3. Explanation
 
 		There are two sources of dotfiles - *standard* and *custom*
-		# *Standard* dotfiles assumed to be something like standard in your organization. 
+		1. *Standard* dotfiles assumed to be something like standard in your organization. 
 			You can change path to *standard repository* only in attributes/default.rb file of this recipe
-		# *Custom* dotfiles are your additional custom dotfiles you want to have on all your nodes. 
+		2. *Custom* dotfiles are your additional custom dotfiles you want to have on all your nodes. 
 			You can change path to *custom repository* in your admin data bag item. 
 
 h2. Data bag attributes
 
-		* 	*enabled_standard* - Enables usage of standard repository
-		* 	*enabled_custom* - Enables/disables usage of your custom repository
-		* 	*custom_dotfiles* - Is an array of dotfilenames you want to be linked to your home directory
-		* 	*custom_dotfiles_repo* - Custom dotfiles repo. ^_^ 
+			*enabled_standard* - Enables usage of standard repository
+		 	*enabled_custom* - Enables/disables usage of your custom repository
+		 	*custom_dotfiles* - Is an array of dotfilenames you want to be linked to your home directory
+		 	*custom_dotfiles_repo* - Custom dotfiles repo. ^_^ 
 
