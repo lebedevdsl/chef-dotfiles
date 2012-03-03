@@ -2,7 +2,7 @@ h1. Dotfiles chef-recipe
 
 h2. But why?
 
-		This chef recipe designed to make administrators everyday routine little bit comfortable.
+		This chef recipe was designed to make administrators everyday routine little bit more comfortable.
 		Tastes differ, so you never been satisfied with default .${SHELL}rc file, and when you needed to fix some things on
 		a freshly setup machine REALY fast and efficient, there were none of your favorite bells and whistles like aliases 
 		or completion options at hand
@@ -11,7 +11,7 @@ h2. But why?
 h2. But how?
 
 	 	Recipe just exports your pretty dotfiles (like .bashrc/.zshrc .vimrc ...) on your chef nodes from git repository
-		then links it to your home directory. PROFIT
+		then links it to your home directory. 
 
 h2. How to?
 
@@ -20,7 +20,8 @@ h2. How to?
 		Then add an admin item to your databag
 		<pre>$ knife data bag create admins admin_name</pre>
 		<pre>$ knife data bag edit admins admin_name</pre>
-		<pre>
+		
+bc.
 		{
 			"id": "admin_name"
 			"dotfiles": {
@@ -35,18 +36,20 @@ h2. How to?
 				"custom_dotfiles_repo": "YOUR_PUBLIC_REPOSITORY_HERE"
 			}
 		}
-		</pre>
+		
+
+h3. Explanation
 
 		There are two sources of dotfiles - *standard* and *custom*
-		* *Standard* dotfiles assumed to be something like standard in your organization. 
+		# *Standard* dotfiles assumed to be something like standard in your organization. 
 			You can change path to *standard repository* only in attributes/default.rb file of this recipe
-		* *Custom* dotfiles are your additional custom dotfiles you want to have on all your nodes. 
+		# *Custom* dotfiles are your additional custom dotfiles you want to have on all your nodes. 
 			You can change path to *custom repository* in your admin data bag item. 
 
 h2. Data bag attributes
 
-		* *enabled_standard* - Enables usage of standard repository
-		* *enabled_custom* - Enables/disables usage of your custom repository
-		* *custom_dotfiles* - Is an array of dotfilenames you want to be linked to your home directory
-		* *custom_dotfiles_repo* - Custom dotfiles repo. ^_^ 
+		* 	*enabled_standard* - Enables usage of standard repository
+		* 	*enabled_custom* - Enables/disables usage of your custom repository
+		* 	*custom_dotfiles* - Is an array of dotfilenames you want to be linked to your home directory
+		* 	*custom_dotfiles_repo* - Custom dotfiles repo. ^_^ 
 
