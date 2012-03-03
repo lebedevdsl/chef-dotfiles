@@ -37,32 +37,26 @@ admins.each do |login|
 	end
 	
 	# Exporting files only if user realy wants to
-	unless admin['dotfiles']['enabled'] != true
-		directory "#{home}/.dotfiles" do
-			action :create
-			owner login
-			mode '0700'
-		end
-		
+	#unless admin['dotfiles']['enabled'] != true
 		# Exporting standard dotfiles only if home_directory exists	
-		log "[dotfiles] Uploading standard dotfiles for #{admin} from #{node[:dotfiles][:standard_repository]} to #{home}/.dotfiles " do
-			level :info
-		end
-		git "#{home}/.dotfiles" do
-			repository node[:dotfiles][:standard_repository]
-			action :export
-			#only_if {File.directory?(home)}
-		end
+		#log "[dotfiles] Uploading standard dotfiles for #{admin} from #{node[:dotfiles][:standard_repository]} to #{home}/.dotfiles " do
+		#	level :info
+		#end
+		#git "#{home}/.dotfiles" do
+		#	repository node[:dotfiles][:standard_repository]
+		#	action :export
+		#	#only_if {File.directory?(home)}
+		#end
 		
-		Dir.foreach("#{home}/.dotfiles") do |entry|
-			backup(entry)
-			link "#{home}/#{entry}" do
-				to entry
-			end
-		end
-		log "[dotfiles] Default dotfiles successfuly exported from #{node[:dotfiles][:standard_repository]}" do
-			level :info
-		end
+		#Dir.foreach("#{home}/.dotfiles") do |entry|
+		#	backup(entry)
+		#	link "#{home}/#{entry}" do
+		#		to entry
+		#	end
+		#end
+		#log "[dotfiles] Default dotfiles successfuly exported from #{node[:dotfiles][:standard_repository]}" do
+		#	level :info
+		#end
 		# Uploading all user's custom dotfiles if present
 		git "#{home}/.custom_dotfiles" do
 			repository admin['dotfiles']['custom_dotfiles_repo']
@@ -78,5 +72,5 @@ admins.each do |login|
 				to "#{home}/.custom_dotfiles/#{entry}"
 			end
 		end
-	end
+	#end
 end
