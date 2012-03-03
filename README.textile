@@ -1,0 +1,32 @@
+h1. Dotfiles chef-recipe
+
+h2. But why?
+
+		This chef recipe designed to make administrators everyday routine little bit comfortable.
+
+h2. But how?
+
+	 	Recipe just exports your pretty dotfiles (like .bashrc/.zshrc .vimrc ...) on your chef nodes from git repository
+		then links it to your home directory. PROFIT
+
+h2. How to?
+
+		You have to make data_bag admins for now to make this recipe to work.
+		<pre>$ knife data bag create admins</pre>
+		Then add an admin item to your databag
+		<pre>$ knife data bag create admins admin_name</pre>
+		<pre>$ knife data bag edit admins admin_name</pre>
+		{
+			"id": "admin_name"
+			"dotfiles": {
+				"comment": "section for dotfiles recipe only",
+				"enabled_standard": false,
+				"enabled_custom": true,
+				"custom_dotfiles": [
+					".zshrc",
+					".vimrc",
+					".toprc"
+					],  
+				"custom_dotfiles_repo": "YOUR_PUBLIC_REPOSITORY_HERE"
+			}
+		}
