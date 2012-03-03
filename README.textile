@@ -22,22 +22,22 @@ h2. How to?
     <pre>$ knife data bag create admins admin_name</pre>
     <pre>$ knife data bag edit admins admin_name</pre>
     
-    <pre>
-    {
-      "id": "admin_name"
-      "dotfiles": {
-        "comment": "section for dotfiles recipe only",
-        "enabled_standard": false,
-        "enabled_custom": true,
-        "custom_dotfiles": [
-          ".zshrc",
-          ".vimrc",
-          ".toprc"
-          ],  
-        "custom_dotfiles_repo": "YOUR_PUBLIC_REPOSITORY_HERE"
-      }
-    }
-    </pre>
+<pre>
+{
+	"id": "admin_name",
+	"dotfiles": {
+		"comment": "section for dotfiles recipe only",
+		"enabled_standard": false,
+		"enabled_custom": true,
+		"custom_dotfiles": [
+			".zshrc",
+			".vimrc",
+			".toprc"
+		],  
+		"custom_dotfiles_repo": "YOUR_PUBLIC_REPOSITORY_HERE"
+	}
+}
+</pre>
 
 h3. Explanation
 
