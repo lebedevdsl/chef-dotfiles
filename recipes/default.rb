@@ -37,40 +37,50 @@ admins.each do |login|
 	end
 	
 	# Exporting files only if user realy wants to
-	#unless admin['dotfiles']['enabled'] != true
+	if admin['dotfiles']['enabled_standard']
 		# Exporting standard dotfiles only if home_directory exists	
-		#log "[dotfiles] Uploading standard dotfiles for #{admin} from #{node[:dotfiles][:standard_repository]} to #{home}/.dotfiles " do
-		#	level :info
-		#end
-		#git "#{home}/.dotfiles" do
-		#	repository node[:dotfiles][:standard_repository]
-		#	action :export
-		#	#only_if {File.directory?(home)}
-		#end
+		log "[dotfiles] Uploading standard dotfiles for #{admin} from #{node[:dotfiles][:standard_repository]} to #{home}/.dotfiles " do
+			level :info
+		end
 		
-		#Dir.foreach("#{home}/.dotfiles") do |entry|
-		#	backup(entry)
-		#	link "#{home}/#{entry}" do
-		#		to entry
-		#	end
-		#end
-		#log "[dotfiles] Default dotfiles successfuly exported from #{node[:dotfiles][:standard_repository]}" do
-		#	level :info
-		#end
-		# Uploading all user's custom dotfiles if present
+		git "#{home}/.dotfiles" do
+			repository node[:dotfiles][:standard_repository]
+			action :sync
+			user login
+			group login
+			only_if {File.directory?(home)}
+		end
+		
+		node[:dotfiles][:files].each do |entry|
+			link "#{home}/#{entry}" do
+				owner login
+				group login
+				to "#{home}/.dotfiles/#{entry}"
+			end
+		end
+		
+		log "[dotfiles] Default dotfiles successfuly exported from #{node[:dotfiles][:standard_repository]}" do
+			level :info
+		end
+	end
+	
+	# Or/and uploading custom dotfiles from private repository
+	if admin['dotfiles']['enabled_custom']	
 		git "#{home}/.custom_dotfiles" do
 			repository admin['dotfiles']['custom_dotfiles_repo']
 			user login
+			group login
 			action :sync
 			not_if { admin['dotfiles']['custom_dotfiles_repo'].nil? }
 			only_if {File.directory?(home)}
 		end
 		
 		admin['dotfiles']['custom_dotfiles'].each do |entry|
-			backup(home,entry)
 			link "#{home}/#{entry}" do
+				owner login
+				group login
 				to "#{home}/.custom_dotfiles/#{entry}"
 			end
 		end
-	#end
+	end
 end
