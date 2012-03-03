@@ -49,7 +49,10 @@ h3. Explanation
 h2. Data bag attributes
 
       *enabled_standard* - Enables usage of standard repository
+
       *enabled_custom* - Enables/disables usage of your custom repository
+
       *custom_dotfiles* - Is an array of dotfilenames you want to be linked to your home directory
+
       *custom_dotfiles_repo* - Custom dotfiles repo. ^_^ 
 
