@@ -5,7 +5,8 @@ h2. But why?
     This chef recipe was designed to make administrators everyday routine little bit more comfortable.
     Tastes differ, so you never been satisfied with default .${SHELL}rc file, and when you needed to fix some things on
     a freshly setup machine REALY fast and efficient, there were none of your favorite bells and whistles like aliases 
-    or completion options at hand
+    or completion options at hand.
+
     Sounds familiar to you? Now it's fixed.
 
 h2. But how?
@@ -48,11 +49,11 @@ h3. Explanation
 
 h2. Data bag attributes
 
-      *enabled_standard* - Enables usage of standard repository
+      *enabled_standard* - Enables usage of standard repository.
 
-      *enabled_custom* - Enables/disables usage of your custom repository
+      *enabled_custom* - Enables/disables usage of your custom repository.
 
-      *custom_dotfiles* - Is an array of dotfilenames you want to be linked to your home directory
+      *custom_dotfiles* - Is an array of dotfilenames you want to be linked to your home directory.
 
-      *custom_dotfiles_repo* - Custom dotfiles repo. ^_^ 
+      *custom_dotfiles_repo* - Custom dotfiles repo.
 
