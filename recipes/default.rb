@@ -45,7 +45,7 @@ admins.each do |login|
 		end
 		
 		# Exporting standard dotfiles only if home_directory exists	
-		log "[dotfiles] Uploading standard dotfiles for #{admin} from #{node[:dotfiles][:standard_repository]} to .dotfiles" do
+		log "[dotfiles] Uploading standard dotfiles for #{admin} from #{node[:dotfiles][:standard_repository]} to #{home}/.dotfiles " do
 			level :info
 		end
 		git "#{home}/.dotfiles" do
@@ -60,7 +60,7 @@ admins.each do |login|
 				to entry
 			end
 		end
-		log "[dotfiles] Default dotfiles successfuly exported from '#{node[:dotfiles][':standard_repository']}'" do
+		log "[dotfiles] Default dotfiles successfuly exported from #{node[:dotfiles][:standard_repository]}" do
 			level :info
 		end
 		# Uploading all user's custom dotfiles if present
