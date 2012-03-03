@@ -67,7 +67,7 @@ admins.each do |login|
 		end
 		
 		admin['dotfiles']['custom_dotfiles'].each do |entry|
-			backup(entry)
+			backup(home,entry)
 			link "#{home}/#{entry}" do
 				to "#{home}/.custom_dotfiles/#{entry}"
 			end
