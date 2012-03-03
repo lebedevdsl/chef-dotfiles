@@ -36,7 +36,7 @@ admins.each do |login|
 	# Exporting files only if user realy wants to
 	if admin['dotfiles']['enabled_standard']
 		# Exporting standard dotfiles only if home_directory exists	
-		log "[dotfiles] Uploading standard dotfiles for #{admin} from #{node[:dotfiles][:standard_repository]} to #{home}/.dotfiles " do
+		log "[dotfiles] Uploading STANDARD dotfiles for #{admin} from #{node[:dotfiles][:standard_repository]} to #{home}/.dotfiles " do
 			level :info
 		end
 		
@@ -63,6 +63,11 @@ admins.each do |login|
 	
 	# Or/and uploading custom dotfiles from private repository
 	if admin['dotfiles']['enabled_custom']	
+		
+		log "[dotfiles] Uploading CUSTOM dotfiles for #{admin} from #{admin['dotfiles']['custom_dotfiles_repo']} to #{home}/.custom_dotfiles " do
+			level :info
+		end
+		
 		git "#{home}/.custom_dotfiles" do
 			repository admin['dotfiles']['custom_dotfiles_repo']
 			user login
