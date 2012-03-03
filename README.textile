@@ -2,25 +2,25 @@ h1. Dotfiles chef-recipe
 
 h2. But why?
 
-    This chef recipe was designed to make administrators everyday routine little bit more comfortable.
-    Tastes differ, so you never been satisfied with default .${SHELL}rc file, and when you needed to fix some things on
-    a freshly setup machine REALY fast and efficient, there were none of your favorite bells and whistles like aliases 
-    or completion options at hand.
+This chef recipe was designed to make administrators everyday routine little bit more comfortable.
+Tastes differ, so you never been satisfied with default .${SHELL}rc file, and when you needed to fix some things on
+a freshly setup machine REALY fast and efficient, there were none of your favorite bells and whistles like aliases 
+or completion options at hand.
 
-    Sounds familiar to you? Now it's fixed.
+Sounds familiar to you? Now it's fixed.
 
 h2. But how?
 
-    Recipe just exports your pretty dotfiles (like .bashrc/.zshrc .vimrc ...) on your chef nodes from git repository
-    then links it to your home directory. 
+Recipe just exports your pretty dotfiles (like .bashrc/.zshrc .vimrc ...) on your chef nodes from git repository
+then links it to your home directory. 
 
 h2. How to?
 
-    You have to make data_bag admins for now to make this recipe to work.
-    <pre>$ knife data bag create admins</pre>
-    Then add an admin item to your databag
-    <pre>$ knife data bag create admins admin_name</pre>
-    <pre>$ knife data bag edit admins admin_name</pre>
+You have to make data_bag admins for now to make this recipe to work.
+<pre>$ knife data bag create admins</pre>
+Then add an admin item to your databag
+<pre>$ knife data bag create admins admin_name</pre>
+<pre>$ knife data bag edit admins admin_name</pre>
     
 <pre>
 {
