@@ -5,9 +5,6 @@
 # Copyright 2012, Oversun-Scalaxy LTD
 #
 
-# Required for backuping original files
-require 'fileutils'
-
 # Installing required git core-packages
 package 'git-core' do
 	action :install
