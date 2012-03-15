@@ -19,11 +19,6 @@ admins.each do |login|
   admin = data_bag_item("admins", login)
   home = "/home/#{login}"
   
-  #logging debug info
-  log "[dotfiles] 3. #{admin['dotfiles']['enabled']}" do
-    level :debug
-  end
-  
   # Exporting files only if user realy wants to
   if admin['dotfiles']['enabled_standard']
     # Exporting standard dotfiles only if home_directory exists 
