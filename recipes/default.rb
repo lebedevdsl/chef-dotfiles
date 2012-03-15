@@ -13,20 +13,11 @@ end
 
 # Retrieving admins collection
 admins = data_bag("admins")
-# logging debug_info
-log "[dotfiles] 1. #{admins}" do
-  level :debug
-end
 
 # admins list round-trip
 admins.each do |login|
   admin = data_bag_item("admins", login)
   home = "/home/#{login}"
-  
-  #logging debug info
-  log "[dotfiles] 2. #{admin} #{home}" do
-    level :debug
-  end
   
   #logging debug info
   log "[dotfiles] 3. #{admin['dotfiles']['enabled']}" do
