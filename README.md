@@ -1,6 +1,8 @@
-h1. Dotfiles chef-recipe
+Dotfiles chef-recipe
+====================
 
-h2. But why?
+But why?
+--------
 
 This chef recipe was designed to make administrators everyday routine little bit more comfortable.
 Tastes differ, so you never been satisfied with default .${SHELL}rc file, and when you needed to fix some things on
@@ -9,45 +11,51 @@ or completion options at hand.
 
 Sounds familiar to you? Now it's fixed.
 
-h2. But how?
+But how?
+--------
 
 Recipe just exports your pretty dotfiles (like .bashrc/.zshrc .vimrc ...) on your chef nodes from git repository
 then links it to your home directory. 
 
-h2. How to?
+How to?
+-------
 
 You have to make data_bag admins for now to make this recipe to work.
-<pre>$ knife data bag create admins</pre>
-Then add an admin item to your databag
-<pre>$ knife data bag create admins admin_name</pre>
-<pre>$ knife data bag edit admins admin_name</pre>
-    
-<pre>
-{
-	"id": "admin_name",
-	"dotfiles": {
-		"comment": "section for dotfiles recipe only",
-		"enabled_standard": false,
-		"enabled_custom": true,
-		"custom_dotfiles": [
-			".zshrc",
-			".vimrc",
-			".toprc"
-		],  
-		"custom_dotfiles_repo": "YOUR_PUBLIC_REPOSITORY_HERE"
-	}
-}
-</pre>
+  
+  `$ knife data bag create admins`
 
-h3. Explanation
+Then add an admin item to your databag
+  
+  `$ knife data bag create admins admin_name`
+  
+  `$ knife data bag edit admins admin_name`
+    
+  <pre>{
+    "id": "admin_name",
+    "dotfiles": {
+      "comment": "section for dotfiles recipe only",
+      "enabled_standard": false,
+      "enabled_custom": true,
+      "custom_dotfiles": [
+        ".zshrc",
+        ".vimrc",
+        ".toprc"
+      ],  
+      "custom_dotfiles_repo": "YOUR_PUBLIC_REPOSITORY_HERE"
+    }
+  }</pre>
+
+Explanation
+-----------
 
 There are two sources of dotfiles - *standard* and *custom*
-# *Standard* dotfiles assumed to be something like standard in your organization. 
+* *Standard* dotfiles assumed to be something like standard in your organization. 
 You can change path to *standard repository* only in attributes/default.rb file of this recipe
-# *Custom* dotfiles are your additional custom dotfiles you want to have on all your nodes. 
+* *Custom* dotfiles are your additional custom dotfiles you want to have on all your nodes. 
 You can change path to *custom repository* in your admin data bag item. 
 
-h2. Data bag attributes
+Data bag attributes
+-------------------
 
 * *enabled_standard* - Enables usage of standard repository.
 * *enabled_custom* - Enables/disables usage of your custom repository.
