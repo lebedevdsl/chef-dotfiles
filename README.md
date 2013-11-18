@@ -63,3 +63,5 @@ Data bag attributes
 * *enabled_custom* - Enables/disables usage of your custom repository.
 * *custom_dotfiles* - Is an array of dotfilenames you want to be linked to your home directory.
 * *custom_dotfiles_repo* - Custom dotfiles repo.
+* *custom_dotfiles_dir* - Directory in `/home/` where dotfiles will be deposited, defaults to `~/.custom_dotfiles`.
+* *custom_dotfiles_repo_prefix* - optional prefix before dotfile path within repo, defaults to `Nil`.
