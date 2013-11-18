@@ -1,7 +1,8 @@
 default['dotfiles'] = {
-  :files => [".bashrc",".zshrc",".vimrc"],
-  :standard_repository => "git://github.com/lebedevdsl/my-dotfiles.git",
-  :data_bag => 'admins',
-  :custom_dotfiles_dir => '.custom_dotfiles',
-  :custom_dotfiles_repo_prefix => Nil
+  :files => [".bashrc"], # Customize per user.
+  :standard_repository => nil, # Customize per organization.
+  :enabled_standard => false, # Customize per organization.
+  :data_bag => 'admins', # Customize per organization.
+  :custom_dotfiles_dir => '.custom_dotfiles', # Customizer per user.
+  :custom_dotfiles_repo_prefix => nil # Customize per user.
 }
