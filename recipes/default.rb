@@ -66,10 +66,18 @@ admins.each do |login|
       end
 
       admin['dotfiles']['custom_dotfiles'].each do |entry|
+        toPath = "#{home}/#{admin['dotfiles']['custom_dotfiles_dir']}/#{entry}"
+
+        unless admin['dotfiles']['custom_dotfiles_repo_prefix'].nil?
+          prefix = admin['dotfiles']['custom_dotfiles_repo_prefix']
+          prefix = prefix.chomp("/").reverse.chomp("/").reverse
+          toPath = "#{home}/#{admin['dotfiles']['custom_dotfiles_dir']}/#{prefix}/#{entry}"
+        end
+
         link "#{home}/#{entry}" do
           owner login
           group login
-          to "#{home}/#{admin['dotfiles']['custom_dotfiles_dir']}/#{entry}"
+          to toPath
           only_if {File.directory?(home)}
         end
       end

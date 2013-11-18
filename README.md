@@ -42,7 +42,8 @@ Then add an admin item to your databag
         ".toprc"
       ],
       "custom_dotfiles_repo": "YOUR_PUBLIC_REPOSITORY_HERE",
-      "custom_dotfiles_dir": "dir in ~ where dotfiles will be deposited, default ~/.custom_dotfiles"
+      "custom_dotfiles_dir": "dir in ~ where dotfiles will be deposited, default ~/.custom_dotfiles",
+      "custom_dotfiles_repo_prefix": "optional prefix before dotfiles in repo, default Nil"
     }
   }</pre>
 
