@@ -21,7 +21,7 @@ SD Defaults
 -----------
 
 Our per-user data bag is named `users`. Each engineer has their own data bag.
-The default data bag for a new user includes this dotfiles section:
+Include this dotfiles section in a new user's data bag:
 
     "dotfiles": {
       "enabled_standard": true,
